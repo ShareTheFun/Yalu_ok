@@ -1,16 +1,607 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MART JOHN LABACO - Tech Enthusiast</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-bg: #0f172a;
+            --secondary-bg: #1e293b;
+            --card-bg: #334155;
+            --accent-color: #38bdf8;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --accent-glow: rgba(56, 189, 248, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--card-bg) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--secondary-bg);
+            box-shadow: 0 4px 6px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        section {
+            margin-bottom: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #0ea5e9 100%);
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--accent-glow);
+            border: 2px solid var(--accent-color);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .interest-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .interest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px var(--shadow-color);
+        }
+
+        .interest-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Support Button */
+        .support-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .support-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4267B2 0%, #5B7BD5 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 20px var(--accent-glow);
+            margin-top: 1rem;
+        }
+
+        .support-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .disclaimer h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .disclaimer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            padding: 1.5rem 0;
+            text-align: center;
+            border-top: 3px solid var(--accent-color);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Code-like elements */
+        .code-block {
+            background-color: var(--primary-bg);
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            border-left: 3px solid var(--accent-color);
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        .tech-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            margin: 0.5rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .header-content h1 {
+                font-size: 3rem;
+            }
+
+            .header-content p {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .about-image {
+                flex: 1;
+            }
+
+            .about-text {
+                flex: 2;
+            }
+
+            .interests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                padding: 2rem;
+            }
+
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .interests-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .code-block {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--secondary-bg);
+                box-shadow: 0 4px 6px var(--shadow-color);
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            nav ul.active {
+                max-height: 300px;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 1rem;
+                border-bottom: 1px solid var(--card-bg);
+            }
+        }
+    </style>
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
-</body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>MART JOHN LABACO</h1>
+                <p>< Tech Enthusiast & Developer /></p>
+            </div>
+        </div>
+    </header>
 
+    <nav>
+        <div class="container nav-container">
+            <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+            <ul id="nav-menu">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#tech">Tech Skills</a></li>
+                <li><a href="#idol">My Idol</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="about" class="about-section">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="Page.jpg" alt="MART JOHN LABACO">
+                </div>
+                <div class="about-text">
+                    <p>Hello world! I'm MART JOHN LABACO, a passionate tech enthusiast and developer.</p>
+                    <p>I've always been fascinated by technology and how it can transform our lives. My journey in the tech world began when I first discovered the power of coding and how it can bring ideas to life.</p>
+                    <div class="code-block">
+                        <code>
+                            const aboutMe = {<br>
+                            &nbsp;&nbsp;name: "MART JOHN LABACO",<br>
+                            &nbsp;&nbsp;passion: "Technology & Development",<br>
+                            &nbsp;&nbsp;goal: "Creating innovative solutions"<br>
+                            }
+                        </code>
+                    </div>
+                    <p>When I'm not coding or exploring new technologies, you might find me troubleshooting hardware, learning about cybersecurity, or discussing the latest tech trends.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="interests-section">
+            <h2>Tech Skills & Interests</h2>
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <h3>Web Development</h3>
+                    <p>Building responsive and interactive websites using modern frameworks and technologies.</p>
+                    <div class="tech-icon">HTML</div>
+                    <div class="tech-icon">CSS</div>
+                    <div class="tech-icon">JS</div>
+                </div>
+                <div class="interest-card">
+                    <h3>Software Development</h3>
+                    <p>Creating efficient and scalable applications to solve real-world problems.</p>
+                    <div class="tech-icon">C++</div>
+                    <div class="tech-icon">Java</div>
+                    <div class="tech-icon">Python</div>
+                </div>
+                <div class="interest-card">
+                    <h3>Cybersecurity</h3>
+                    <p>Exploring security measures and best practices to protect digital assets.</p>
+                    <div class="tech-icon">Sec</div>
+                    <div class="tech-icon">Net</div>
+                    <div class="tech-icon">Crypto</div>
+                </div>
+                <div class="interest-card">
+                    <h3>Hardware & IoT</h3>
+                    <p>Working with hardware components and Internet of Things devices.</p>
+                    <div class="tech-icon">IoT</div>
+                    <div class="tech-icon">Arduino</div>
+                    <div class="tech-icon">RPi</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="idol" class="about-section">
+            <h2>My Idol - Yalu_ok</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="Idol.jpg" alt="Yalu_ok">
+                </div>
+                <div class="about-text">
+                    <p>My biggest inspiration in the tech world is Yalu_ok, an amazing Facebook content creator who shares their life running a computer shop while creating entertaining and educational content.</p>
+                    <p>What makes Yalu_ok special is their unique blend of:</p>
+                    <ul class="feature-list">
+                        <li>Real-life computer shop experiences and stories</li>
+                        <li>Hilarious tech-related content that makes learning fun</li>
+                        <li>Practical computer tips and tricks for everyday users</li>
+                        <li>Troubleshooting guides that have saved me countless hours</li>
+                    </ul>
+                    <div class="code-block">
+                        <code>
+                            // What I've learned from Yalu_ok<br>
+                            class ComputerShopLessons {<br>
+                            &nbsp;&nbsp;constructor() {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.technicalSkills = true;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.customerService = true;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.problemSolving = true;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;this.humor = "Always needed";<br>
+                            &nbsp;&nbsp;}<br>
+                            }
+                        </code>
+                    </div>
+                    <p>Their content has not only taught me valuable technical skills but also shown me how to approach tech problems with creativity and humor. As someone interested in both technology and content creation, Yalu_ok represents the perfect blend of education and entertainment.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="support" class="support-section">
+            <h2>Support Yalu_ok</h2>
+            <p>If you enjoy tech content, computer tips, and funny stories from a real computer shop owner, check out Yalu_ok's Facebook page!</p>
+            <a href="https://www.facebook.com/YaluokOfficial" class="support-button" target="_blank">
+                Support on Facebook
+            </a>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Get In Touch</h2>
+            <div class="interest-card">
+                <p>I'm always open to discussing new projects, tech ideas, or collaboration opportunities.</p>
+                <p>You can reach me at: <strong>mart1john2labaco3@gmail.com</strong></p>
+                <div class="code-block">
+                    <code>
+                        const contact = async () => {<br>
+                        &nbsp;&nbsp;const response = await sendEmail('mart1john2labaco3@gmail.com');<br>
+                        &nbsp;&nbsp;return response.status === 200 ? 'Message sent!' : 'Try again later';<br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <section class="disclaimer">
+            <h3>Disclaimer</h3>
+            <p>Fan page dedicated to supporting and promoting Yalu_ok. This page is not affiliated with or endorsed by Yalu_ok. Content posted is for fan appreciation only and falls under Fair Use as stated in Section 185 of the Philippine Intellectual Property Code (R.A. 8293). All rights to original content belong to their respective owners. No copyright infringement intended.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 MART JOHN LABACO. All rights reserved.</p>
+                <p>< Coded with passion /></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">↑</a>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
 </html>
